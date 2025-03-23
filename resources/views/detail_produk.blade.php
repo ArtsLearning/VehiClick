@@ -1,4 +1,4 @@
-<?php 
+<!-- 
     // Nama file: [detail_produk.php]
     // Deskripsi: [Berfungsi untuk menampilkan data halaman detail produk untuk mengecek ketersediaan melalui inputan tanggal sewa ]
     // Dibuat Oleh: [Muhammad Danial] - [3312401042]
@@ -37,7 +37,7 @@
             echo "<script type='text/javascript'> document.location = 'detail_sewa.php?id_kendaraan=$idKendaraan&harga=$harga&mulai=$tglSewa&selesai=$tglKembali&pickup=$pickup'; </script>";
         }
     }
-?>
+-->
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -60,6 +60,9 @@
         href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet"
         />
+        <!-- Bootstrap CDN -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
         <style>
         .card {
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -112,11 +115,6 @@
                     </li>
                 </ul>
                 <ul class="nav align-items-center">
-                    <?php if (!isset($_SESSION["role"])) { ?>
-                        <li class="nav-item">
-                            <a href="login.php"><button class="btn btn-primary" type="submit">Masuk / Daftar</button></a>
-                        </li>
-                    <?php } else { ?>
                         <li class="nav-item dropdown pe-3">
                                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
                                 <button
@@ -124,18 +122,18 @@
                                     type="button"
                                     id="userMenu"
                                 >
-                                Hai, <?php echo htmlspecialchars($_SESSION['userName']); ?>
+                                Hai, 
                             </button>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                                 <li>
-                                    <a class="dropdown-item d-flex align-items-center" href="user/index.php?user_name=<?= ($_SESSION['userName']) ?>">Profil Saya</a>
+                                    <a class="dropdown-item d-flex align-items-center" >Profil Saya</a>
                                 </li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
                                 <li>
-                                    <a class="dropdown-item d-flex align-items-center" href="user/riwayat.php?user_name=<?= ($_SESSION['userName']) ?>">Riwayat Pesanan</a>
+                                    <a class="dropdown-item d-flex align-items-center" >Riwayat Pesanan</a>
                                 </li>
                                 <li>
                                     <hr class="dropdown-divider">
@@ -147,21 +145,13 @@
                                 </li>
                             </ul>
                         </li>
-                    <?php } ?>
+                    
                 </ul>
             </div>
             </div>
         </div>
     </nav>
     <!-- Navbar End -->
-
-        <?php 
-        // Ambil data produk berdasarkan produk yang diklik
-        $nama = htmlspecialchars($_GET['nama']);
-        $idKendaraan = $_GET['id_kendaraan'];
-        $queryProduk = mysqli_query($koneksi, "SELECT * FROM kendaraan WHERE nama_kendaraan = '$nama'");
-        $produk = mysqli_fetch_array($queryProduk);
-        ?>
 
         <script type="text/javascript">
         function valid()
@@ -190,25 +180,24 @@
                     <div class="col-lg-10">
                         <div class="card shadow-lg border-0">
                             <div class="row g-0">
-                            <?php foreach($queryProduk as $data) : ?>
                                 <!-- Product Image -->
                                 <div class="col-md-6">
-                                    <img src="dashboard/uploads/<?= $data['gambar'];?>" alt="<?= $data['nama_kendaraan'];?>" 
+                                    <img src="dashboard/uploads/"  
                                     class="img-fluid rounded-start w-100 px-3 py-4">
                                 </div>
                                 <!-- Product Details -->
                                 <div class="col-md-6">
                                     <div class="card-body">
-                                        <h2 class="card-title"><?= $data['nama_kendaraan'] ?></h2>
-                                        <h4 class="card-subtitle text-muted mb-4">Rp. <?= number_format($data['harga_per_hari']) ?> / hari</h4>
-                            <?php endforeach; ?>
+                                        <h2 class="card-title"></h2>
+                                        <h4 class="card-subtitle text-muted mb-4">Rp. 20 / hari</h4>
+                       
                                         <form method="POST" name="sewa" onSubmit="return valid();">
-                                        <input type="hidden" class="form-control" name="idKendaraan"  value="<?= $data['id'];?>"required>
-                                        <input type="hidden" class="form-control" name="harga"  value="<?= $data['harga_per_hari'];?>"required>
+                                        <input type="hidden" class="form-control" name="idKendaraan"  
+                                        <input type="hidden" class="form-control" name="harga"  "
                                             <div class="mb-3">
                                                 <label for="tglSewa" class="form-label">Tanggal Sewa</label>
                                                 <input type="date" name="tglSewa" class="form-control" placeholder="Masukkan tanggal sewa" required>
-                                                <input type="hidden" name="now" class="form-control" value="<?= $now;?>">
+                                                <input type="hidden" name="now" class="form-control">
                                             </div>
                                             <div class="mb-4">
                                                 <label for="tglKembali" class="form-label">Tanggal Kembali</label>
@@ -241,18 +230,11 @@
             <div class="container">
                 <h3 class="text-center text-white mb-3">Produk Terkait</h3>
                 <div class="row">
-                    <?php 
-                    $queryProdukTerkait = mysqli_query($koneksi, "SELECT * FROM kendaraan WHERE tipe_kendaraan = '$produk[tipe_kendaraan]' 
-                    AND nama_kendaraan != '$produk[nama_kendaraan]'
-                    LIMIT 4");
-                    foreach($queryProdukTerkait as $data) :
-                    ?>
                     <div class="col-md-6 col-lg-3 mb-3">
-                        <a href="detail_produk.php?nama=<?= $data['nama_kendaraan']; ?>">
-                            <img src="dashboard/uploads/<?= $data['gambar'];?>" alt="<?= $data['nama_kendaraan'];?>" class="img-fluid img-thumbnail produk-terkait">
+                        <a href="detail_produk.php?nama=">
+                            <img src="dashboard/uploads/" class="img-fluid img-thumbnail produk-terkait">
                         </a>
                     </div>
-                    <?php endforeach ; ?>
                 </div>
             </div>
         </div>
@@ -261,4 +243,3 @@
         <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
     </body>
     </html>
-<?php } ?>

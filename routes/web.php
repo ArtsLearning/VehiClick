@@ -6,10 +6,6 @@ Route::get('/Home', function () {
     return view('Home');
 });
 
-Route::get('/Login', function () {
-    return view('Login');
-});
-
 Route::get('/Register', function () {
     return view('Register');
 });
@@ -21,3 +17,12 @@ Route::get('/Dashboard', function () {
 Route::get('/Product', function () {
     return view('Product');
 });
+
+Route::get('/login', function () {
+    return view('login');
+});
+
+Route::get('/detail_produk', function () {
+    return view('detail_produk');
+});
+
