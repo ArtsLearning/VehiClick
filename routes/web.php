@@ -21,3 +21,11 @@ Route::get('/Dashboard', function () {
 Route::get('/Product', function () {
     return view('Product');
 });
+
+Route::get('/Daftar', function () {
+    return view('Daftar');
+});
+
+Route::get('/Logout', function () {
+    return view('Logout');
+});
