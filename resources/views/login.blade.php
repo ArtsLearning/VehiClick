@@ -1,5 +1,5 @@
-<?php 
-session_start();
+
+<!--session_start();
 
 if (isset($_SESSION["login"]) ){
     header("Location: index.php");
@@ -7,8 +7,9 @@ if (isset($_SESSION["login"]) ){
 }
 
 require "function.php"; 
+-->
 
-?>
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -104,11 +105,12 @@ require "function.php";
                         <input type="password" class="form-control" id="password" name= "password" placeholder="Masukkan kata sandi" required>
                     </div>
 
-                    <?php if (isset($error)) : ?>
+                    @if(session('error'))
                         <div class="alert alert-danger" role="alert">
-                        Username atau password anda salah !!
+                            {{ session('error') }}
                         </div>
-                    <?php endif ; ?>
+                    @endif
+
 
                     <button type="submit" name="login" class="btn btn-primary w-100 mb-3">Masuk</button>
                 </form>
