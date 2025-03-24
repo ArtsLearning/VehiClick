@@ -33,3 +33,11 @@ Route::get('/daftar', function () {
 Route::get('/logout', function () {
     return view('logout');
 });
+
+Route::get('/produk', function () {
+    return view('produk');
+});
+
+Route::get('/detail_sewa', function () {
+    return view('detail_sewa');
+});
