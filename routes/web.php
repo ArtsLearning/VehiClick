@@ -26,10 +26,10 @@ Route::get('/detail_produk', function () {
     return view('detail_produk');
 });
 
-Route::get('/Daftar', function () {
-    return view('Daftar');
+Route::get('/daftar', function () {
+    return view('daftar');
 });
 
-Route::get('/Logout', function () {
-    return view('Logout');
+Route::get('/logout', function () {
+    return view('logout');
 });
